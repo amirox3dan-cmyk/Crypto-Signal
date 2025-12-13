@@ -25,9 +25,11 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, language = 'f
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     const success = onLogin(username, password);
-    
+
     if (!success) {
       setError(t.loginError);
+    } else {
+      setError('');
     }
   };
 
@@ -69,7 +71,10 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, language = 'f
                 <input
                   type="text"
                   value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                    setError('');
+                  }}
                   className={`block w-full rounded-xl border border-white/10 bg-dark-900 py-3 text-white placeholder-gray-600 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all sm:text-sm ${language === 'fa' ? 'pl-10 pr-4' : 'pr-10 pl-4'}`}
                   placeholder={t.username}
                 />
@@ -84,7 +89,10 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, language = 'f
                 <input
                   type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setError('');
+                  }}
                   className={`block w-full rounded-xl border border-white/10 bg-dark-900 py-3 text-white placeholder-gray-600 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 focus:outline-none transition-all sm:text-sm ${language === 'fa' ? 'pl-10 pr-4' : 'pr-10 pl-4'}`}
                   placeholder={t.password}
                 />
